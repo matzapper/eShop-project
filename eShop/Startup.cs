@@ -1,4 +1,5 @@
 using eShop.Data;
+using eShop.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,10 @@ namespace eShop
             //Adding/Configuring the DbContext file
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             //We also need to define the data storage
+
+            //Services configuration
+            services.AddScoped<IActorsService, ActorsService>();
+
             services.AddControllersWithViews();
         }
 
