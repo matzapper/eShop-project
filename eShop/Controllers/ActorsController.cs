@@ -19,7 +19,7 @@ namespace eShop.Controllers
         public IActionResult Index() //default action Index.
         {
             var data = _context.Actors.ToList(); //we are returning the actor data as a list of actors
-            return View();
+            return View(data); //using data
         }
     }
 }

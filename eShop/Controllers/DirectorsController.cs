@@ -20,7 +20,7 @@ namespace eShop.Controllers
         public async Task<IActionResult> Index() //Using async methods
         {
             var allDirectors = await _context.Directors.ToListAsync(); //we are returning the director data as a list of directors
-            return View();
+            return View(allDirectors);
         }
     }
 }

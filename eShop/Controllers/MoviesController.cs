@@ -19,8 +19,8 @@ namespace eShop.Controllers
         }
         public async Task<IActionResult> Index() //Using async methods
         {
-            var allMovies = await _context.Movies.ToListAsync(); //we are returning the movie data as a list of movies
-            return View();
+            var allMovies = await _context.Movies.Include(n => n.Shop).OrderBy(n => n.Name).ToListAsync(); //we are returning the movie data as a list of movies
+            return View(allMovies);
         }
     }
 }
