@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace eShop.Data.Services
 {
-    public interface IActorsService:IEntityBaseRepository<Actor> //Here we inherit from the IEntityBaseRepository
+    public class ShopsService:EntityBaseRepository<Shop>, IShopsService
     {
-
+        public ShopsService(AppDbContext context) : base(context)
+        {
+                
+        }
     }
 }

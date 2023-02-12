@@ -32,6 +32,8 @@ namespace eShop
 
             //Services configuration
             services.AddScoped<IActorsService, ActorsService>();
+            services.AddScoped<IDirectorsService, DirectorsService> ();
+            services.AddScoped<IShopsService, ShopsService>();
 
             services.AddControllersWithViews();
         }

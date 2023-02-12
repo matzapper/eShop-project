@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Data.Services
 {
-    public interface IActorsService:IEntityBaseRepository<Actor> //Here we inherit from the IEntityBaseRepository
+    public interface IDirectorsService : IEntityBaseRepository<Director>
     {
-
     }
 }

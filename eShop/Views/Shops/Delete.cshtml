@@ -1,0 +1,57 @@
+﻿@*
+  Shops deletion page  
+*@
+
+@model Shop
+
+@{
+    ViewData["Title"] = "Delete shop";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete Confirmation for @Model.Name</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img id="ShopLogoPreview" class="border-info rounded-circle" style="max-width:150px"/>
+                </div> @*Profile picture preview*@
+
+                <div class="form-group">
+                    <label asp-for="Logo" class="control-label"></label>
+                    <input asp-for="Logo" class="form-control" readonly/>
+                    <span asp-validation-for="Logo" class="text-danger"></span> @*First field of the actors creation page*@
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly/>
+                    <span asp-validation-for="Name" class="text-danger"></span> @*Second field of the actors creation page*@
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span> @*Third field of the actors creation page (readonly)*@
+                </div>
+
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id">
+                        <input type="submit" value="Confirm" class="btn btn-danger float-right"/>
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+        var output = document.getElementById('ShopLogoPreview');
+        output.src = $("#Logo").val();
+        })
+    </script>
+}

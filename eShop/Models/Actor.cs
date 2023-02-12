@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eShop.Data.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Models
 {
-    public class Actor
+    public class Actor:IEntityBase //This model inherits from the IEntityBase
     {
         [Key] //Data annotation for the id/key
         public int Id { get; set; } //Unique identifier for this model
