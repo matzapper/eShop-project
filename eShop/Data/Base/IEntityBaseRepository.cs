@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace eShop.Data.Base
@@ -9,6 +10,7 @@ namespace eShop.Data.Base
     {
         //Method 1 - Get all the actors from the database (Async)
         Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties);
         //Method 2 - Get a single actor from the database by id
         Task<T> GetByIdAsync(int id);
         //Method 3 - Adding an actor to the database
