@@ -1,7 +1,9 @@
 using eShop.Data;
+using eShop.Data.Cart;
 using eShop.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +37,14 @@ namespace eShop
             services.AddScoped<IDirectorsService, DirectorsService> ();
             services.AddScoped<IShopsService, ShopsService>();
             services.AddScoped<IMoviesService, MoviesService>();
+            services.AddScoped<IOrdersService, OrdersService>();
+
+
+            //Configuring the HttpContextAccessor
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            services.AddSession(); //Adding a session
 
             services.AddControllersWithViews();
         }
@@ -56,6 +66,7 @@ namespace eShop
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession(); //Adding a session
 
             app.UseAuthorization();
 
