@@ -1,6 +1,8 @@
 ﻿using eShop.Data;
 using eShop.Data.Services;
+using eShop.Data.Static;
 using eShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)] //So that we cant access the create/edit and delete settings via the api
     public class ActorsController : Controller
     {
         //Declaring the appdbcontext file
@@ -18,6 +21,7 @@ namespace eShop.Controllers
         {
             _service = service;
         }
+        [AllowAnonymous] //You dont have to be authorized to do this action
         public async Task<IActionResult> Index() //default action Index.
         {
             var data = await _service.GetAllAsync(); //we are returning the actor data as a list of actors
@@ -42,6 +46,7 @@ namespace eShop.Controllers
         }
 
         //Get: Actors/Details/1 (Getting actor details)
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id) 
         {
             var actorDetails = await _service.GetByIdAsync(id);

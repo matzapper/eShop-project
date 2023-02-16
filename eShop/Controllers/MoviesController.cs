@@ -1,6 +1,8 @@
 ﻿using eShop.Data;
 using eShop.Data.Services;
+using eShop.Data.Static;
 using eShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)] //So that you cant access certain features via the api
     public class MoviesController : Controller
     {
         //Declaring the appdbcontext file
@@ -20,6 +23,8 @@ namespace eShop.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous] //You can access this action even if you are not registered/logged in
         public async Task<IActionResult> Index() //Using async methods
         {
             var allMovies = await _service.GetAllAsync(n => n.Shop); //we are returning the movie data as a list of movies
@@ -27,6 +32,7 @@ namespace eShop.Controllers
         }
 
         //Search bar functionality
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString) //Using async methods
         {
             var allMovies = await _service.GetAllAsync(n => n.Shop); //we are returning the movie data as a list of movies
@@ -39,6 +45,7 @@ namespace eShop.Controllers
         }
 
         //GET: Movies/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         { 
             var movieDetail = await _service.GetMovieByIdAsync(id);

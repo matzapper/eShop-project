@@ -1,5 +1,6 @@
 ﻿using eShop.Data;
 using eShop.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore; //We need MEF to make this file as a trasnaltor between the models and the databases. Using older version of MEF for .net core 5, will migrate to 6.0 once complete
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Data
 {
-    public class AppDbContext: DbContext //We are inheriting from the base class "DbContext". //To make this file a sort of official translator between the models and the databases
+    public class AppDbContext: IdentityDbContext<ApplicationUser> //We are inheriting from the base class "DbContext". //To make this file a sort of official translator between the models and the databases
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) //Default constructor. Takes AppDbContext as a parameter
         {

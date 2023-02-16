@@ -1,6 +1,8 @@
 ﻿using eShop.Data;
 using eShop.Data.Services;
+using eShop.Data.Static;
 using eShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)] //Only admins can access these features
     public class DirectorsController : Controller
     {
         //Declaring the IDirectorsService
@@ -19,6 +22,8 @@ namespace eShop.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index() //Using async methods
         {
             var allDirectors = await _service.GetAllAsync(); //we are returning the director data as a list of directors
@@ -26,6 +31,7 @@ namespace eShop.Controllers
         }
 
         //GET: Directors/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var directorDetails = await _service.GetByIdAsync(id);

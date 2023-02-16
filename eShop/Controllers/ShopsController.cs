@@ -1,6 +1,8 @@
 ﻿using eShop.Data;
 using eShop.Data.Services;
+using eShop.Data.Static;
 using eShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace eShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)] //So that we cant access certain settings via the api
     public class ShopsController : Controller
     {
         //Declaring the appdbcontext file
@@ -19,6 +22,8 @@ namespace eShop.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous] //Ypu can access this even if you arent logged/registered
         public async Task<IActionResult> Index() //Using async methods
         {
             var allShops = await _service.GetAllAsync(); //we are returning the shop data as a list of shops
@@ -40,6 +45,7 @@ namespace eShop.Controllers
         }
 
         //GET: Shops/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var shopDetails = await _service.GetByIdAsync(id);

@@ -11,6 +11,6 @@ namespace eShop.Data.Services
         //Method 1: Add orders to the database
         Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress);
         //Method 2: Get all orders from the database
-        Task<List<Order>> GetOrdersByUserIdAsync(string userId);
+        Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole);
     }
 }
